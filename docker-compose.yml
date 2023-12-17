@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  task4:
+    image: ${DOCKER_REGISTRY-}task4
+    container_name: courses.app
+    build:
+      context: .
+      dockerfile: Dockerfile
+  schoolDB:
+    image: mysql:latest
+    container_name: schoolDB
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=schoolDB
+    volumes:
+      - ./.containers/database:/var/lib/mysql
+    ports:
+      - "3306:3306"
